@@ -5,7 +5,6 @@
       <h2>{{ department.departmentName }}</h2>
       <h2>Description</h2>
       <p>Manager ID: {{ department.managerID }}</p>
-      <!-- Additional department details can be displayed here -->
       <router-link to="/departments" class="btn btn-primary">Back</router-link>
       <button @click="editDepartment" class="btn btn-edit">Edit</button>
       <button @click="deleteDepartment" class="btn btn-delete">Delete</button>
@@ -30,9 +29,11 @@ const fetchDepartment = async () => {
     const departmentId = route.params.id;
     if (departmentId) {
       const response = await apiService.getDepartmentById(departmentId);
-      if (response) {
-        department.value = response;
+      console.log(response.data);
+      if (response && response.length > 0) {
+        department.value = response[0];
       }
+
     }
   } catch (error) {
     console.error('Error fetching department details:', error);
@@ -72,11 +73,11 @@ onMounted(() => {
   height: 100vh; 
 }
 
-.department-heading {
-  margin-top: 50px;  
+.employee-heading {
+  margin-top: px;  
 }
-.department-detail {
-  margin: 100px;
+.employee-detail {
+  margin: 50px;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -113,4 +114,15 @@ onMounted(() => {
   background-color: red;
   color: #ffffff;
 }
+
+.description-container {
+  border: 1px solid #ddd; 
+  padding: 10px; 
+  margin-bottom: 20px; 
+}
+/* Reduce font size in description container */
+.description-container p {
+  font-size: 15px;
+}
 </style>
+

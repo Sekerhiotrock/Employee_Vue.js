@@ -4,7 +4,6 @@
       <div class="emp-addSearch">
         <SearchBox @search="handleSearch" v-model:search="searchQuery" />
         <li><router-link to="/projects/add-project" class="btn btn-primary square">Add</router-link></li>
-        <li><router-link to="/projects/projectdetail" class="btn btn-primary square">Check</router-link></li>
       </div>
     </div>
     <div class="emp-table" v-if="filteredProjects.length > 0">
@@ -123,6 +122,7 @@ onMounted(async () => {
 
 .data-table {
   font-family: 'Times', serif;
+  margin-bottom: 400px
 }
 
 tbody tr:hover {
@@ -139,7 +139,6 @@ tbody tr:hover {
   font-family: 'Times', serif;
 }
 
-/* Added styles for the "Add" and "Check" buttons */
 .btn-primary.square {
   border-radius: 0;
   background-color: #ffffff;
@@ -152,4 +151,25 @@ tbody tr:hover {
   background-color: #4facfe;
   color: white;
 }
+
+.data-table tbody tr:hover {
+  background-color: #5693cb; 
+  cursor: pointer; 
+}
+
+.data-table tbody tr:first-child td:first-child {
+  background-color: transparent; 
+}
+
+.data-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #ddd; /* Add border bottom */
+  border-right: 1px solid #ddd; /* Add border right */
+}
+
+/* Style for last cell in each row */
+.data-table td:last-child {
+  border-right: none; /* Remove right border for the last cell */
+}
 </style>
+

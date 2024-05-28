@@ -3,18 +3,22 @@
     <h2 class="employee-heading">Employee Details</h2>
     <div v-if="employee" class="employee-detail">
       <h2>{{ employee.firstName }} {{ employee.lastName }}</h2>
-      <h2>Description</h2>
-      <p>Email: {{ employee.email }}</p>
-      <p>Gender: {{ employee.gender }}</p>
-      <p>Job Title: {{ employee.jobTitle }}</p>
-      <p>Department: {{ employee.departmentName }}</p>
-      <!-- <p>Projects: {{ employee.projects.join(', ') }}</p> -->
-      <div v-if="employee.projects && employee.projects.length" class="projects">
-        <h3>Projects:</h3>
-        <ul>
-          <li v-for="(project, index) in employee.projects" :key="index">{{ project }}</li>
-        </ul>
+      <!-- Description container -->
+      <div class="description-container">
+        <h2>Description:</h2>
+        <p>Email: {{ employee.email }}</p>
+        <p>Gender: {{ employee.gender }}</p>
+        <p>Job Title: {{ employee.jobTitle }}</p>
+        <p>Department: {{ employee.departmentName }}</p>
+        <!-- <p>Projects: {{ employee.projects.join(', ') }}</p> -->
+        <div v-if="employee.projects && employee.projects.length" class="projects">
+          <h3>Tasks:</h3>
+          <ul>
+            <li v-for="(project, index) in employee.projects" :key="index">{{ project }}</li>
+          </ul>
+        </div>
       </div>
+      <!-- Buttons -->
       <router-link to="/employees" class="btn btn-primary">Back</router-link>
       <button @click="editEmployee" class="btn btn-edit">Edit</button>
       <button @click="deleteEmployee" class="btn btn-delete">Delete</button>
@@ -24,6 +28,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -82,10 +87,10 @@ onMounted(() => {
 }
 
 .employee-heading {
-  margin-top: 50px;  
+  margin-top: px;  
 }
 .employee-detail {
-  margin: 100px;
+  margin: 50px;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -121,5 +126,15 @@ onMounted(() => {
 .btn-delete:hover {
   background-color: red;
   color: #ffffff;
+}
+
+.description-container {
+  border: 1px solid #ddd; 
+  padding: 10px; 
+  margin-bottom: 20px; 
+}
+/* Reduce font size in description container */
+.description-container p {
+  font-size: 15px;
 }
 </style>

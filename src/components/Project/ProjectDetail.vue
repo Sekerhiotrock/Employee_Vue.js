@@ -1,21 +1,25 @@
 <template>
   <div class="container">
-      <h2>Project Details</h2>
-      <div v-if="project" class="project-detail">
-          <h2>{{ project.projectName }}</h2>
-          <h2>Description</h2>
-          <p>Department: {{ project.department }}</p>
-          <p>Start Date: {{ formatDate(project.startDate) }}</p>
-          <p>End Date: {{ formatDate(project.endDate)}}</p>
-          <router-link to="/projects" class="btn btn-primary">Back to Projects</router-link>
-          <button @click="editProject" class="btn btn-primary">Edit</button>
-          <button @click="deleteProject" class="btn btn-danger">Delete</button>
+    <h2>Project Details</h2>
+    <div v-if="project" class="project-detail">
+      <!-- Project name moved outside the container -->
+      <h2>{{ project.projectName }}</h2>
+      <div class="description">
+        <h2>Description</h2>
+        <p>Department: {{ project.department }}</p>
+        <p>Start Date: {{ formatDate(project.startDate) }}</p>
+        <p>End Date: {{ formatDate(project.endDate)}}</p>
+        <router-link to="/projects" class="btn btn-primary">Back</router-link>
+        <button @click="editProject" class="btn btn-edit">Edit</button>
+        <button @click="deleteProject" class="btn btn-danger">Delete</button>
       </div>
-      <div v-else>
-          <p>waiting for server..</p>
-      </div>
+    </div>
+    <div v-else>
+      <p>waiting for server..</p>
+    </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -72,17 +76,17 @@ onMounted(() => {
 
 <style scoped>
 .container {
-font-family: 'Times New Roman', Times, serif;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: flex-start; 
-height: 100vh; 
+  font-family: 'Times New Roman', Times, serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  height: 100vh; 
 }
 
 h2 {
-margin-top: 20px;
-font-size: 50px;
+  margin-top: 20px;
+  font-size: 50px;
 }
 
 .project-detail {
@@ -90,26 +94,46 @@ font-size: 50px;
   font-family: 'Times New Roman', Times, serif;
 }
 
+.description {
+  border: 1px solid #ccc; /* Add border style */
+  padding: 20px; /* Add padding for better spacing */
+}
+
 .btn {
-padding: 10px 20px;
-font-size: 16px;
-border: none;
-border-radius: 4px;
-cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .btn-primary {
-background-color: grey;
-color: white;
+  background-color: grey;
+  color: white;
+}
+
+.btn-edit {
+  background-color: #ffffff;
+  color: rgb(82, 200, 255);
+}
+
+.btn-edit:hover {
+  background-color: rgb(82, 200, 255);
+  color: #ffffff;
 }
 
 .btn-danger {
-background-color: #ff6347;
-color: white;
+  background-color: #ffffff;
+  color: rgb(82, 200, 255);
+}
+
+.btn-danger:hover {
+  background-color: red;
+  color: #ffffff;
 }
 
 .btn-primary,
 .btn-danger {
-margin-right: 10px;
+  margin-right: 10px;
 }
 </style>

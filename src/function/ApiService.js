@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:7210/api';
+const baseURL = 'http://localhost:5105/api';
 
 const apiService = {
   async getEmployees() {
@@ -8,7 +8,7 @@ const apiService = {
       const response = await axios.get(`${baseURL}/Employee/GetEmployees`);
       console.log(response.data);
       if (!response.data) {
-        throw new Error('Server not response');
+        throw new Error('Network response was not ok');
       }
       return response.data;
     } catch (error) {
@@ -136,8 +136,74 @@ const apiService = {
     }
   },
   
+
+  // Projects
+
+  async getProjects() {
+    try {
+      const response = await axios.get(`${baseURL}/Project/GetProjects`);
+      console.log(response.data);
+      if (!response.data) {
+        throw new Error('Network response was not ok');
+      }
+      return response.data;
+    } catch (error) {
+      alert(error.message);
+    }
+  },
+  
+  async getProjectById(projectId){
+    try {
+      const response = await axios.get(`${baseURL}/Project/GetProject/${projectId}`);
+      console.log('API response:', response.data);
+      if (!response.data) {
+        throw new Error('Failed to fetch project');
+      }
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching project:', error);
+      throw error;
+    }
+  },
+  
+  async searchProjects(text) {
+    try {
+      const response = await axios.get(`${baseURL}/Project/SearchProjects`, { params: { text } });
+      return response.data;
+    } catch (error) {
+      console.error('Error searching projects:', error);
+      throw error;
+    }
+  },
+  
+  async addProject(project) {
+    try {
+      const response = await axios.post(`${baseURL}/Project/AddNewProject`, project);
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to add project: ' + error.message);
+    }
+  },
+  
+  async deleteProject(projectId) {
+    try {
+      const response = await axios.delete(`${baseURL}/Project/DeleteProject?id=${projectId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting project:', error);
+      throw error;
+    }
+  },
+  
+  async updateProject(projectData) {
+    try {
+      const response = await axios.put(`${baseURL}/Project/UpdateProjects`, projectData);
+      return response.data;
+    } catch (error) {
+      throw new Error(`Error updating project: ${error.message}`);
+    }
+  }
+
 };
-
-
 
 export { apiService };
